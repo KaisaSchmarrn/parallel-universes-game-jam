@@ -5,10 +5,24 @@ using UnityEngine;
 
 public class Portal : MonoBehaviour
 {
+    [SerializeField] private UniverseType_SO universeType;
     [SerializeField] private Portal nextPortal;
+    [SerializeField] private MeshRenderer lightRenderer;
+    [SerializeField] private MeshRenderer eventHorizonRenderer;
+
 
     private PlayerController player;
     private float dotProductLastFrame = 0f;
+
+    public UniverseType_SO UniverseType => universeType;
+
+    private void Awake()
+    {
+        if (universeType != null) lightRenderer.material = universeType.UniverseMaterial;
+
+        if (nextPortal == null) return;
+        if (nextPortal.UniverseType != null) eventHorizonRenderer.material = nextPortal.UniverseType.UniverseMaterial;
+    }
 
     private void Update()
     {
@@ -25,13 +39,11 @@ public class Portal : MonoBehaviour
 
             Quaternion relativeRotation = Quaternion.FromToRotation(transform.forward, player.transform.forward);
             Quaternion newRotation = nextPortal.transform.rotation * relativeRotation;
-            /*
-            Vector3 relativeRotation = transform.InverseTransformDirection(player.transform.forward);
-            Vector3 newForward = transform.TransformDirection(relativeRotation);
-            */
-
+            
             player.Teleport(newPosition, newRotation);
             player = null;
+
+            GameManager.Instance.HandleUniverseSwitched(universeType, nextPortal.UniverseType);
         }
 
         dotProductLastFrame = dotProduct;
@@ -42,7 +54,6 @@ public class Portal : MonoBehaviour
         if (other.transform.TryGetComponent(out PlayerController player))
         {
             this.player = player;
-            Debug.Log("playerEnter");
         }
     }
 
@@ -51,7 +62,6 @@ public class Portal : MonoBehaviour
         if (other.transform.TryGetComponent(out PlayerController player))
         {
             this.player = null;
-            Debug.Log("playerExit");
         }
     }
 }

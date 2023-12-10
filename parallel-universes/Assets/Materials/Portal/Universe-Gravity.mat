@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: GalaxyMaterial_12
+  m_Name: Universe-Gravity
   m_Shader: {fileID: -6465566751694194690, guid: eccc0934a4c2a0b499270ffed865aefc,
     type: 3}
   m_Parent: {fileID: 2100000, guid: dd90eb2b6b8ce4c4ab6de637e54b66f8, type: 2}
