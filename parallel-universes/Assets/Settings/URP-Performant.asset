@@ -23,7 +23,11 @@ MonoBehaviour:
   m_RequireOpaqueTexture: 1
   m_OpaqueDownsampling: 1
   m_SupportsTerrainHoles: 1
+<<<<<<< HEAD
   m_SupportsHDR: 0
+=======
+  m_SupportsHDR: 1
+>>>>>>> 91c36b07dfa43df62bc1232485fbfb2fb184d400
   m_HDRColorBufferPrecision: 0
   m_MSAA: 1
   m_RenderScale: 1
